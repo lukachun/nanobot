@@ -1,49 +1,24 @@
 ---
 name: weather
-description: Get current weather and forecasts (no API key required).
-homepage: https://wttr.in/:help
-metadata: {"nanobot":{"emoji":"🌤️","requires":{"bins":["curl"]}}}
+description: 根据城市查询当地天气
+homepage: https://uapis.cn/api/v1/misc/weather
 ---
 
-# Weather
+# 天气查询
 
-Two free services, no API keys needed.
+使用 uapis.cn 免费天气API查询当前天气信息，支持中文城市名称，无需API密钥。
+此技能使用返回结果中的所有字段，包括 `weather`（天气状况）、`temperature`（温度）、`humidity`（湿度）、`wind_direction`（风向）、`wind_power`（风力等级）等
 
-## wttr.in (primary)
+## 快速开始
 
-Quick one-liner:
-```bash
-curl -s "wttr.in/London?format=3"
-# Output: London: ⛅️ +8°C
-```
+### 基础查询
 
-Compact format:
-```bash
-curl -s "wttr.in/London?format=%l:+%c+%t+%h+%w"
-# Output: London: ⛅️ +8°C 71% ↙5km/h
-```
+# 查询北京天气
+curl -s "https://uapis.cn/api/v1/misc/weather?city=北京&lang=zh"
 
-Full forecast:
-```bash
-curl -s "wttr.in/London?T"
-```
+# 查询上海天气
+curl -s "https://uapis.cn/api/v1/misc/weather?city=上海&lang=zh"
 
-Format codes: `%c` condition · `%t` temp · `%h` humidity · `%w` wind · `%l` location · `%m` moon
+# 查询广州天气
+curl -s "https://uapis.cn/api/v1/misc/weather?city=广州&lang=zh"
 
-Tips:
-- URL-encode spaces: `wttr.in/New+York`
-- Airport codes: `wttr.in/JFK`
-- Units: `?m` (metric) `?u` (USCS)
-- Today only: `?1` · Current only: `?0`
-- PNG: `curl -s "wttr.in/Berlin.png" -o /tmp/weather.png`
-
-## Open-Meteo (fallback, JSON)
-
-Free, no key, good for programmatic use:
-```bash
-curl -s "https://api.open-meteo.com/v1/forecast?latitude=51.5&longitude=-0.12&current_weather=true"
-```
-
-Find coordinates for a city, then query. Returns JSON with temp, windspeed, weathercode.
-
-Docs: https://open-meteo.com/en/docs
